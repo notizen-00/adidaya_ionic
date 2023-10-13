@@ -14,6 +14,7 @@
         :items="tipe_items"
         item-title="title"
         item-value="isi"
+        @update:modelValue="changeTipe"
         >
         <template v-slot:prepend>
           <v-icon color="blue">fas fa-filter</v-icon>
@@ -29,6 +30,7 @@
         item-title="title"
         item-value="isi"
         density="compact"
+        @update:modelValue="changeJarak"
         >
 
         </v-select>
@@ -42,12 +44,13 @@
         hide-arrows
       >
         <v-slide-group-item
-          v-for="n in getHotel"
+          v-for="(n, index) in getHotel"
           :key="n"
           v-slot="{ isSelected, toggle, selectedClass }"
         >
         <router-link
-        :to="isSelected ? `/detail_hotel/${n.placeId}` : '/'" 
+        :to="isSelected ? `/detail_hotel/${n.placeId}` : `/detail_hotel/${n.placeId}`" 
+        @click.prevent="updateSelectedSlideIndex(index)"
         >
           <v-card
             color="white border border-grey"
@@ -123,43 +126,55 @@ import { storeToRefs } from 'pinia'
 import { inject,onMounted,ref, watch } from 'vue'
 import { Preferences } from '@capacitor/preferences';
 const store = inject('store')
-const model = ref(0)
-const { getHotel,getFotoHotel } = storeToRefs(store.hotelStore)
-const tipe_select = ref({ title: 'Hotel', isi: 'Hotel' });
+
+const { getHotel,getFotoHotel,getTipe,getJarak,isMountedFirst,getSlide } = storeToRefs(store.hotelStore)
+const model = getSlide.value;
+
+
+const tipe_select = ref({ title: getTipe.value, isi: getTipe.value });
 const tipe_items = ref([
   { title: 'Hotel', isi: 'Hotel' },
   { title: 'Semua', isi: 'Semua' },
 ]);
 
-const jarak_select = ref({ title: '1 Km', isi: 1 })
+const jarak_select = ref({ title: getJarak.value+' Km', isi: getJarak.value })
 const jarak_items = ref([
   { title: '1 km', isi: 1 },
   { title: '3 km', isi: 3 },
 ]);
 
-// Menambahkan watcher untuk memantau perubahan pada select
-watch(tipe_select, (newSelect) => {
+const changeJarak = async() => {
 
-  console.log(jarak_select.value.isi)
+  store.hotelStore.setJarak(jarak_select.value)
+
   const param = {
-    jarak: jarak_select.value.isi,
-    keyword: newSelect,
-    type: "lodging"
-  };
+      jarak: getJarak.value,
+      keyword: getTipe.value,
+      type: "lodging"
+    };
+   await store.hotelStore.fetchHotel(param);
 
-  store.hotelStore.fetchHotel(param);
-});
+}
 
-watch(jarak_select, (newSelect) => {
+const updateSelectedSlideIndex = (index) => {
+  store.hotelStore.setSlide(index);
+
+  console.log(getSlide.value)
+};
+
+
+const changeTipe = async() => {
+
+  store.hotelStore.setTipe(tipe_select.value)
+
   const param = {
-    jarak: newSelect,
-    keyword: tipe_select.value.isi,
-    type: "lodging"
-  };
+      jarak: getJarak.value,
+      keyword: getTipe.value,
+      type: "lodging"
+    };
+   await store.hotelStore.fetchHotel(param);
 
-
-  store.hotelStore.fetchHotel(param);
-});
+}
 
 const getPhotoUrl = (photoReference) => {
   return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference=${photoReference}&key=AIzaSyBeeo9yBypCnU7vRHINzcgKfFhS-huXAgo`;
@@ -170,15 +185,20 @@ const getDetail = async(placeId) => {
 
 }
 onMounted( async () => {
+  
+  if (!isMountedFirst) {
 
-
+    store.hotelStore.setMountedFirst()
+    // Lakukan inisialisasi atau permintaan API hanya pada saat first mount
     const param = {
-      jarak: jarak_select.value.isi,
-      keyword: tipe_select.value.isi,
+      jarak: getJarak.value,
+      keyword: getTipe.value,
       type: "lodging"
     };
-    store.hotelStore.fetchHotel(param);
-  
-
+    await store.hotelStore.fetchHotel(param);
+  }else{
+    console.log('sudah termount')
+  }
 });
+
 </script>

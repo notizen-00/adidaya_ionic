@@ -6,13 +6,18 @@ import { CapacitorHttp } from '@capacitor/core';
 export const useHotelStores = defineStore('hotelStore', {
   state: () => ({
     login: false,
+    MountedFirst:false,
     token:'',
     lokasi:{
         lat:'',
         lng:''
     },
     hotel:[],
-    foto_hotel:[]
+    foto_hotel:[],
+    tipe:"Hotel",
+    jarak:1,
+    slide:0,
+    detail_hotel:[]
  
   }),
   actions: {
@@ -46,10 +51,25 @@ export const useHotelStores = defineStore('hotelStore', {
           
           this.hotel = response.data[0].item;
 
-          // await Preferences.set({
-          //   key: 'hotel_param',
-          //   value: JSON.stringify(param),
-          // });
+    },
+    async fetchHotelCache(param){
+
+      const jarak = param.jarak;
+      const type = param.type;
+      const keyword = param.keyword;
+      const options = {
+        
+          url: 'https://ao.apps.unej.ac.id/hotel/api/'+keyword+'/'+type+'/'+jarak,
+        };
+      
+        const response = await CapacitorHttp.get(options);
+        
+        this.hotel = response.data[0].item;
+
+    },
+    SetMountedFirst()
+    {
+      this.MountedFirst = true
     },
     async fetchDetail(placeId) {
       const url = 'https://ao.apps.unej.ac.id/hotel/api/foto'; // URL tanpa photo_reference
@@ -58,17 +78,32 @@ export const useHotelStores = defineStore('hotelStore', {
         const response = await axios.post(url, { placeId: placeId });
     
         console.log(placeId);
-        console.log(response.data.result.photos); // Data yang diterima dari server
+        console.log(response.data.result); // Data yang diterima dari server
 
         this.foto_hotel = response.data.result.photos;
+        this.detail_hotel = response.data.result;
       } catch (error) {
         console.error(error);
       }
+    },
+    setJarak(value){
+        this.jarak = value
+
+    },
+    setTipe(value){
+      this.tipe = value
+    },
+    setSlide(value){
+      this.slide = value
+      console.log(value)
     }
   },
   getters: {
     isLogin() {
       return this.login
+    },
+    isMountedFirst(){
+      return this.MountedFirst
     },
     getToken(){
         return this.token
@@ -80,8 +115,22 @@ export const useHotelStores = defineStore('hotelStore', {
     {
         return this.lokasi
     },
+    getSlide() {
+      return this.slide
+    },
+    getTipe()
+    {
+      return this.tipe
+    },
+    getJarak()
+    {
+      return this.jarak
+    },
     getFotoHotel(){
       return this.foto_hotel
+    },
+    getDetailHotel(){
+      return this.detail_hotel
     }
 
   },
