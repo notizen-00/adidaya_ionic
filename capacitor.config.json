@@ -6,9 +6,15 @@
     "androidScheme": "https",
     "cleartext":"true"
   },
+  "android": {
+    "minVersion": "33"
+  },
   "plugins": {
     "CapacitorHttp": {
       "enabled": true
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
     }
   }
 }

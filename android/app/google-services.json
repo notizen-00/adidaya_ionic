@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "80491298152",
+    "project_id": "adidaya-unej",
+    "storage_bucket": "adidaya-unej.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80491298152:android:790ad7e72f7ec814c32add",
+        "android_client_info": {
+          "package_name": "com.adidayaunej.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiKe9d1B_nUmOjtU89o6CHqXMbx-UgkR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -42,8 +42,6 @@
     <v-card-title><span class="line-clamp-3">{{ getDetailHotel.name }}</span></v-card-title>
 
     <v-card-subtitle>
-      <span class="me-1">Local Favorite</span>
-
       <v-icon
         color="error"
         icon="fas fa-rating"
@@ -62,23 +60,34 @@
       </v-icon>
 
       <div class="text-grey ms-4">
-        {{ getDetailHotel.rating }} ({{ getDetailHotel.user_ratings_total }})
+        {{ getDetailHotel.rating ? getDetailHotel.rating : '-' }} ({{ getDetailHotel.user_ratings_total }})
       </div>
     </v-row>
 
     <div class="my-4 text-subtitle-1">
       <v-icon color="green"> fa-thin fa-location-dot</v-icon> • {{ getDetailHotel.vicinity }}
     </div>
+    
+    <span class="text-xs">
+     Status : <v-chip size="x-small" color="info">{{ getDetailHotel.current_opening_hours ? 'Buka':'Tutup' }}</v-chip>
+    </span>
+    <br>
+    <h2 class="text-xs ml-3 mt-4 mr-3 text-center">
+        <blockquote>{{ getDetailHotel.editorial_summary ? getDetailHotel.editorial_summary.overview : 'Tidak ada deskripsi pada tempat ini' }}</blockquote>
+    </h2>
 
 
   </v-card-text>
 
   <v-divider class="mx-4 mb-1"></v-divider>
 
-  <v-card-title>Tonight's availability</v-card-title>
+  <v-card-title>Jam Buka </v-card-title>
+  
 
 
 </v-card>
+
+
 
 </template>
 <script setup>

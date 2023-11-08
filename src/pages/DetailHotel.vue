@@ -2,9 +2,16 @@
     <div>
 
       <CarouselFoto/>
-        Detailsss
 
-        {{ route.params.placeId }}
+      <div class="absolute bottom-0 w-full">
+        <v-btn 
+        block 
+        size="x-large"
+        color="info"
+        >
+        Navigasi 
+        </v-btn>
+      </div>
     </div>
 </template>
 <script setup>

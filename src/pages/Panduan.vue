@@ -1,7 +1,7 @@
 
 <template>
     <v-container>
-    <div class="w-full d-flex justify-between mt-5">
+    <div class="w-full d-flex justify-between mt-5 mb-10">
         <div class="w-full">
             <h1 class="font-extrabold font-sans  text-slate-800 line-clamp-2">Panduan<br>
                 Abdidaya Ormawa 2023</h1>
@@ -9,6 +9,8 @@
    
       
     </div>
+
+    <Accordion></Accordion>
     <div class="mt-10">
          Perguruan Tinggi Penyelenggara Abdidaya Ormawa tahun 2023 ditetapkan oleh Direktorat Pembelajaran dan Kemahasiswaan berdasarkan proposal dan hasil evaluasi kesiapan penyelenggaraan Abdidaya Ormawa 2023. Tim verifikasi Abdidaya Oramawa 2023 adalah tim reviewer PPK Ormawa yang keanggotaan dan tugasnya ditetapkan melalui Surat Keputusan Direktur Belmawa. Peserta Abdidaya Ormawa 2023 adalah peserta PPK Ormawa yang telah dinyatakan memenuhi syarat oleh tim verifikasi sebelum pelaksanaan Abdidaya Ormawa 2023.<br> Peserta Abdidaya Ormawa 2023 terbagi menjadi 5 kelompok yaitu:
         <br>
@@ -40,4 +42,5 @@ Peserta merupakan Ketua Umum atau Pengurus Inti Organisasi Kemahasiswaan (Ormawa
 
 <script setup>
  import BottomNavigation from '@/components/BottomNavigation.vue'
+ import Accordion from '@/components/panduan/accordion.vue'
 </script>

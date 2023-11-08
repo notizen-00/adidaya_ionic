@@ -2,7 +2,7 @@
     <v-container>
         <div class="w-full d-flex justify-between mt-5">
             <div class="w-1/2">
-                <h1 class="font-bold font-sans text-slate-800 line-clamp-2">Mulai tentukan<br> pilihan Anda disini</h1>
+                <h1 class="font-bold font-sans text-slate-800 line-clamp-2">Mulai tentukan<br> pilihan Anda disini </h1>
             </div>
             <div class="w-1/2 text-end">
                 <v-btn
@@ -22,10 +22,10 @@
             </v-btn>
             </div>
         </div>
-
+      
         <CardMenu/>
-        
-        <ListHotel></ListHotel>
+        {{ notificationss }}
+        <!-- <ListHotel></ListHotel> -->
         <bottom-navigation></bottom-navigation>
     </v-container>
 </template>
@@ -34,4 +34,60 @@
     import GetLocation from '@/components/beranda/GetLocation.vue';
     import ListHotel from '@/components/beranda/ListHotel.vue';
     import BottomNavigation from '@/components/BottomNavigation.vue'
+    import { onMounted,ref } from 'vue';
+    import { PushNotifications } from '@capacitor/push-notifications';
+
+    const tokens = ref('')
+    const notificationss = ref([])
+const addListeners = async () => {
+  await PushNotifications.addListener('registration', token => {
+    console.info('Registration token: ', token.value);
+
+    tokens.value = token.value;
+
+
+  });
+
+  await PushNotifications.addListener('registrationError', err => {
+    console.error('Registration error: ', err.error);
+  });
+
+  await PushNotifications.addListener('pushNotificationReceived', notification => {
+    console.log('Push notification received: ', notification);
+  });
+
+  await PushNotifications.addListener('pushNotificationActionPerformed', notification => {
+    console.log('Push notification action performed', notification.actionId, notification.inputValue);
+  });
+}
+
+const registerNotifications = async () => {
+  let permStatus = await PushNotifications.checkPermissions();
+
+  if (permStatus.receive === 'prompt') {
+    permStatus = await PushNotifications.requestPermissions();
+  }
+
+  if (permStatus.receive !== 'granted') {
+    throw new Error('User denied permissions!');
+  }
+
+  await PushNotifications.register();
+}
+
+const getDeliveredNotifications = async () => {
+  const notificationList = await PushNotifications.getDeliveredNotifications();
+  console.log('delivered notifications', notificationList);
+  notificationss.value = notificationList
+}
+
+
+
+onMounted(()=>{
+    addListeners();
+registerNotifications();
+getDeliveredNotifications();
+
+})
+
 </script>
