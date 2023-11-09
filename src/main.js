@@ -6,11 +6,17 @@ import { pinia } from './Store/pinia'
 import { useStore } from '@/Store/modules'
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
+import { VSkeletonLoader } from 'vuetify/labs/VSkeletonLoader'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import * as labsComponents from 'vuetify/labs/components'
 
 const vuetify = createVuetify({
-  components,
+  components: {
+    ...components,
+    ...labsComponents,
+    VSkeletonLoader // Include VSkeletonLoader
+  },
   directives,
 })
 

@@ -2,7 +2,7 @@
     <div>
 
         <div class="font-extrabold text-base mt-5 mb-5">
-            Hotel Terdekat
+           Toko Oleh Oleh Terdekat
         </div>
         <div class="mt-2 d-flex w-full">
         <v-select
@@ -36,16 +36,10 @@
         </v-select>
 
         </div>
-
-        <v-lazy
-  :min-height="200"
-  :options="{'threshold':1}"
-  transition="fade-transition"
->
         <v-slide-group
         v-model="model"
         class="mt-2"
-        selected-class="bg-white smooth-scroll"
+        selected-class="bg-white"
         mandatory
         hide-arrows
       >
@@ -97,7 +91,6 @@
         </router-link>
         </v-slide-group-item>
       </v-slide-group>
-      </v-lazy>
       
    
     </div>
@@ -115,7 +108,7 @@ const model = getSlide.value;
 
 const tipe_select = ref({ title: getTipe.value, isi: getTipe.value });
 const tipe_items = ref([
-  { title: 'Hotel', isi: 'Hotel' },
+  { title: 'Oleh Oleh', isi: 'oleh-oleh' },
   { title: 'Semua', isi: 'Semua' },
 ]);
 
@@ -187,9 +180,3 @@ onMounted( async () => {
 });
 
 </script>
-<style type="text/css">
-.smooth-scroll {
-  overflow-x: auto;
-  scroll-behavior: smooth;
-}
-</style>

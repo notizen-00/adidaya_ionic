@@ -37,7 +37,11 @@
   </v-slide-group>
 
   <component v-if="model === 0" :is="ListHotel" />
+  <component v-if="model === 0" :is="ListHotelRekomendasi" />
   <component v-if="model === 1" :is="ListWarung" />
+  <component v-if="model === 2" :is="ListOleh" />
+
+
   
  
 </template>
@@ -48,7 +52,9 @@ import WarungSvg from "@/assets/img/room-service.svg";
 import OlehSvg from "@/assets/img/basket-shopping-simple.svg";
 import FasumSvg from "@/assets/img/archway.svg";
 import ListHotel from "@/components/beranda/ListHotel.vue";
+import ListHotelRekomendasi from "@/components/beranda/ListHotelRekomendasi.vue";
 import ListWarung from "@/components/beranda/ListWarung.vue";
+import ListOleh from '@/components/beranda/ListOleh.vue';
 import {ref} from 'vue'
 const model = ref(0);
 const menuItems = [

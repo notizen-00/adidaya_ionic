@@ -1,14 +1,16 @@
 <template>
 
-    <v-layout class="overflow-visible" style="height: 56px;">
+   
       <v-bottom-navigation
       class=" w-3/4"
         v-model="value"
+        height="60"
         bg-color="#F3FCFF"
         horizontal
-        rounded="xl"
+        rounded="lg"
+        app
       >
-        <v-btn class="my-btn" to="/beranda">
+        <v-btn class="my-btn " variant="text" to="/beranda">
             <v-icon>
                 <svg color="white" id="home"  xmlns="http://www.w3.org/2000/svg" width="26.995" height="26.995" viewBox="0 0 26.995 26.995">
                 <path id="Path_3" data-name="Path 3" d="M25.842,9.78l-7.97-7.97a6.194,6.194,0,0,0-8.749,0L1.153,9.78A3.911,3.911,0,0,0,0,12.564V24.237A2.764,2.764,0,0,0,2.761,27H24.234A2.764,2.764,0,0,0,27,24.237V12.564A3.911,3.911,0,0,0,25.842,9.78ZM23.621,23.622H18V20.043A4.3,4.3,0,0,0,13.7,15.748h-.409A4.3,4.3,0,0,0,9,20.043H9v3.579H3.374V12.564a.568.568,0,0,1,.164-.4l7.97-7.97a2.812,2.812,0,0,1,3.977,0h0l7.97,7.97a.568.568,0,0,1,.164.4V23.622Z" transform="translate(0 -0.001)" :fill="isActive('beranda') ? '#1aa7ff':'#c0dee8'"/>
@@ -49,7 +51,7 @@
             </v-icon>
         </v-btn>
       </v-bottom-navigation>
-    </v-layout>
+  
   </template>
 
   <script>

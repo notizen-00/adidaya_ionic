@@ -1,39 +1,11 @@
 <template>
     <div>
 
-        <div class="font-extrabold text-base mt-5 mb-5">
-            Hotel Terdekat
+        <div class="font-extrabold text-base mt-5 mb-5" >
+            Hotel Rekomendasi
         </div>
         <div class="mt-2 d-flex w-full">
-        <v-select
-        v-model="tipe_select"
-        variant="outlined"
-        label="Tipe"
-        density="compact"
-        class="w-1/2"
-        :items="tipe_items"
-        item-title="title"
-        item-value="isi"
-        @update:modelValue="changeTipe"
-        >
-        <template v-slot:prepend>
-          <v-icon color="blue">fas fa-filter</v-icon>
-        </template>
-        </v-select>
-
-        <v-select
-        v-model="jarak_select"
-        class="w-1/2 ml-2"
-        variant="outlined"
-        label="jarak"
-        :items="jarak_items"
-        item-title="title"
-        item-value="isi"
-        density="compact"
-        @update:modelValue="changeJarak"
-        >
-
-        </v-select>
+       
 
         </div>
 
@@ -44,13 +16,13 @@
 >
         <v-slide-group
         v-model="model"
-        class="mt-2"
+        class="mt-2 mb-20"
         selected-class="bg-white smooth-scroll"
         mandatory
         hide-arrows
       >
         <v-slide-group-item
-          v-for="(n, index) in getHotel"
+          v-for="(n, index) in getHotelRekomendasi"
           :key="n"
           v-slot="{ isSelected, toggle, selectedClass }"
         >
@@ -71,28 +43,34 @@
             
             <div class="absolute right-2">
               <v-icon color="yellow" size="15">fas fa-star</v-icon>
-               <span class="text-xs text-white ml-2">{{ n.rating }}</span>
+              
             </div>
             <div class="absolute -z-10 " >
               <v-img
-                cover
+              cover
                 :width="500"
                 :height="500"
-                :src="getPhotoUrl(n.foto)"
+                :src="n.photo"
               ></v-img>
              
 
             </div>
             <div class="d-flex inline-block justify-center bottom-4 absolute"> 
-              <span class="text-white line-clamp-1 text-center">{{ n.nama_hotel }}</span>
-              <!-- <v-btn
-              @click.prevent="getDetail(n.placeId)"
-              >
-              Get Foto
-              </v-btn> -->
+              <!-- <span class="text-white line-clamp-1 text-center">{{ n.nama_hotel }}</span> -->
+              <br>
             </div>
-           
           </div>
+          </v-card>
+          <v-card
+          height="55"
+          width="200"
+          class="-mt-20 ml-2 rounded-b-xl"
+          color="black"
+          >
+          <span class="text-white line-clamp-1 text-center">{{ n.nama_hotel }}</span>
+          <span class="w-full mx-auto text-slate-300 text-sm text-center d-flex justify-center">
+           Rp. {{ n.harga }}
+          </span>
           </v-card>
         </router-link>
         </v-slide-group-item>
@@ -109,7 +87,7 @@ import { inject,onMounted,ref, watch } from 'vue'
 import { Preferences } from '@capacitor/preferences';
 const store = inject('store')
 
-const { getHotel,getFotoHotel,getTipe,getJarak,isMountedFirst,getSlide } = storeToRefs(store.hotelStore)
+const { getHotel,getFotoHotel,getHotelRekomendasi,getTipe,getJarak,isMountedFirst,getSlide } = storeToRefs(store.hotelStore)
 const model = getSlide.value;
 
 

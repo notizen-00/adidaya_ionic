@@ -17,10 +17,28 @@ export const useHotelStores = defineStore('hotelStore', {
     tipe:"Hotel",
     jarak:1,
     slide:0,
-    detail_hotel:[]
+    detail_hotel:[],
+    navigation:'',
+    hotel_rekomendasi:[],
  
   }),
   actions: {
+    async fetchHotelRekomendasi(){
+
+      const url = 'https://ao.apps.unej.ac.id/hotel/rekomendasi'; // URL tanpa photo_reference
+    
+      try {
+        const response = await axios.get(url);
+  
+        console.log(response.data); 
+
+        this.hotel_rekomendasi = response.data;
+
+      } catch (error) {
+        console.error(error);
+      }
+
+    },
     async setLokasi (coords) {
 
          this.lokasi.lat = coords.latitude;
@@ -67,6 +85,10 @@ export const useHotelStores = defineStore('hotelStore', {
         this.hotel = response.data[0].item;
 
     },
+    setNavigation(value){
+
+        this.navigation = value;
+    },
     SetMountedFirst()
     {
       this.MountedFirst = true
@@ -111,6 +133,10 @@ export const useHotelStores = defineStore('hotelStore', {
     getHotel(){
         return this.hotel
     },
+    getHotelRekomendasi()
+    {
+      return this.hotel_rekomendasi
+    },
     getLokasi()
     {
         return this.lokasi
@@ -131,6 +157,9 @@ export const useHotelStores = defineStore('hotelStore', {
     },
     getDetailHotel(){
       return this.detail_hotel
+    },
+    getNavigation(){
+      return this.navigation
     }
 
   },
