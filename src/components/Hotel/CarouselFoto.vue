@@ -27,7 +27,7 @@
     <v-carousel
     v-if="isLoading == false" class="w-full"
     cycle
-    height="200"
+    height="300"
     :show-arrows="false"
   >
     <v-carousel-item
@@ -133,10 +133,11 @@
   </v-expansion-panels>
 
   <v-container>
-    <div class="h-36 text-h6">
+    <div class=" text-h6">
      <v-icon color="info" class="mr-3" size="18" >fas fa-message </v-icon> <u>Ulasan</u>
-
+      
     </div>
+    <Ulasan></Ulasan>
     
   </v-container>
 
@@ -145,7 +146,7 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import {inject,ref,onMounted} from 'vue'
-
+import Ulasan from '@/components/ulasan/Ulasan.vue';
 const store = inject('store')
 const isLoading = ref(true)
 const expanded = ref(false)

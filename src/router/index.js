@@ -6,12 +6,17 @@ import Pengumuman from '@/pages/Pengumuman.vue'
 import Panduan from '@/pages/Panduan.vue'
 import Video from '@/pages/Video.vue'
 import DetailHotel from '@/pages/DetailHotel.vue'
-
+import Start from '@/pages/Start.vue'
 const routes = [
     {
       path: '/',
       name:'Home',
       component:Home
+    },
+    {
+      path:'/start',
+      name:'Start',
+      component:Start
     },
     {
       path:'/beranda',

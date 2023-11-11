@@ -9,7 +9,7 @@
         </v-app-bar>
     <v-container>
 
-    <div class=" mt-20">
+    <div class=" mt-20 mb-20">
     <p class="text-large font-bold">
         Kamis, 7 Desember 2023  <v-btn class="ml-3 w-1/3" color="blue" rounded="xl" size="small">Hari 1</v-btn>
     </p>

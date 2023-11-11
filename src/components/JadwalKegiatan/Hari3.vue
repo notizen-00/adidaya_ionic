@@ -2,7 +2,7 @@
     <template>
         <v-timeline side="end" align="start">
           <v-timeline-item
-            dot-color="pink"
+            dot-color="black"
             size="small"
             v-for="n in jadwalKegiatan"
             :key="n"

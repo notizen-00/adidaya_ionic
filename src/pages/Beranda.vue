@@ -5,6 +5,7 @@
         <h1 class="font-bold font-sans text-white line-clamp-2">Mulai tentukan<br> pilihan Anda disini </h1>
     </div>
     <div class="w-1/2 text-end">
+      <router-link to="/">
       <v-btn
       icon
       color="white"
@@ -19,6 +20,7 @@
             </svg>
       </v-icon>
     </v-btn>
+  </router-link>
     </div>
     </v-app-bar>
     <v-container>

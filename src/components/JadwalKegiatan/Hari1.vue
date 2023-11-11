@@ -1,13 +1,13 @@
 <template>
     <v-timeline side="end" align="start">
       <v-timeline-item
-        dot-color="pink"
+        :dot-color="n.id == 1 ? 'blue':'black'"
         size="small"
         v-for="n in jadwalKegiatan"
         :key="n"
       >
         <div class="d-flex ">
-          <small class="mr-2 w-1/3 text-xs font-bold">{{ n.waktu }}</small>
+          <small class="mr-2 w-1/4 text-xs font-bold">{{ n.waktu }}</small>
           <div class="w-3/4">
             <strong class="text-xs"><v-icon class="fas fa-location-dot" size="18" color="green"></v-icon> {{ n.lokasi }}</strong>
             <div class="text-caption">

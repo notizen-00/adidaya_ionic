@@ -29,7 +29,7 @@
             ></v-img>
           </div>
           <div class="d-flex inline-block justify-center bottom-4 absolute">
-            <span class="text-slate-300">{{ item.name }}</span>
+            <span :class="isSelected ? 'text-white':'text-slate-300'">{{ item.name }}</span>
           </div>
         </div>
       </v-card>

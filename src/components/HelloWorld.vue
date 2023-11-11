@@ -34,10 +34,8 @@ pusat oleh-oleh dan fasilitas umum disini
   </p>
 
 
-  
-
   <div class="fixed inset-x-0 bottom-0 p-4 ">
-    <router-link to="/beranda" class="w-full">
+    <router-link to="/start" class="w-full">
     <button class="bg-blue-500 w-full text-white py-2 px-4 rounded-full shadow-lg hover:bg-blue-400 transition duration-300">
       Mulai
     </button>
@@ -47,12 +45,12 @@ pusat oleh-oleh dan fasilitas umum disini
 </v-container>
 </template>
 <script setup>
-  import Img1 from '@/assets/img/satu.svg'
-  import Img2 from '@/assets/img/dua.svg'
-  import Img3 from '@/assets/img/tiga.svg'
-  import Img4 from '@/assets/img/empat.svg'
-  import Img5 from '@/assets/img/lima.svg'
-  import Img6 from '@/assets/img/enam.svg'
+  import Img1 from '@/assets/img/satu.png'
+  import Img2 from '@/assets/img/dua.png'
+  import Img3 from '@/assets/img/tiga.png'
+  import Img4 from '@/assets/img/empat.png'
+  import Img5 from '@/assets/img/lima.png'
+  import Img6 from '@/assets/img/enam.png'
 </script>
 <style scoped>
 .grid-container {

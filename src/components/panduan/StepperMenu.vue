@@ -4,7 +4,7 @@
         <v-card-text>
           <v-select
             v-model="steps"
-            :items="[0, 1, 2, 3, 4]"
+            :items="[0, 1, 2, 3, 'Bab 1 : Profil Singkat Universitas Jember']"
             label="-- Pilih Bab --"
           ></v-select>
         </v-card-text>
@@ -44,7 +44,7 @@
                 height="200"
                 class="-z-999 absolute"
                 >
-                sdf
+              
                 </v-sheet>
               </v-card>
             </v-stepper-window-item>
