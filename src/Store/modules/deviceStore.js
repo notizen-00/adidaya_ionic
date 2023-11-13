@@ -21,7 +21,7 @@ export const useDeviceStores = defineStore('deviceStore', {
       this.websocket.onclose = () => {
         console.log('WebSocket connection closed.');
       };
-
+      
       this.websocket.onmessage = (e) =>{
                 const payload = JSON.parse(e.data);
                 
