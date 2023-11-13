@@ -146,20 +146,28 @@ import Section1 from '@/assets/img/section1.png';
 import Section2 from '@/assets/img/section2.png';
 import Section3 from '@/assets/img/section3.png';
 
+import { storeToRefs } from 'pinia';
 
-import { ref } from 'vue';
+import { ref,onMounted,inject } from 'vue';
 import { useRouter } from 'vue-router';
 
 const model = ref(0);
 const router = useRouter();
+const store = inject('store')
 
 const toggleModel = () => {
   if (model.value === 2) {
     router.push('/beranda');
+  
   } else {
     model.value++;
   }
 };
+
+onMounted(async()=>{
+  store.deviceStore.Connect();
+
+})
 
 
 </script>

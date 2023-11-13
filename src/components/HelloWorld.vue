@@ -45,12 +45,22 @@ pusat oleh-oleh dan fasilitas umum disini
 </v-container>
 </template>
 <script setup>
+
+  import {ref,inject,onMounted} from 'vue'
+  import { Device } from '@capacitor/device';
   import Img1 from '@/assets/img/satu.png'
   import Img2 from '@/assets/img/dua.png'
   import Img3 from '@/assets/img/tiga.png'
   import Img4 from '@/assets/img/empat.png'
   import Img5 from '@/assets/img/lima.png'
   import Img6 from '@/assets/img/enam.png'
+  const store = inject('store')
+  onMounted(async()=>{
+    const info = await Device.getId();
+    
+    await store.deviceStore.setDevice(info.identifier)
+  
+  })
 </script>
 <style scoped>
 .grid-container {

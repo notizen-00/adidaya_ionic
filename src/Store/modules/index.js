@@ -4,6 +4,8 @@ import { useAuthStores } from './authStore'
 import { useLokasiStores } from './lokasiStore'
 import { useHotelStores } from './hotelStore'
 import { useWarungStores } from './warungStore'
+import { useDeviceStores } from './deviceStore'
+import { useNotificationStores } from './notificationStore'
 // Impor modul-modul lain jika ada
 
 export function useStore() {
@@ -12,6 +14,8 @@ export function useStore() {
     lokasiStore:useLokasiStores(),
     hotelStore:useHotelStores(),
     warungStore:useWarungStores(),
-    // Masukkan modul-modul lain di sini jika ada
+    deviceStore:useDeviceStores(),
+    notificationStore:useNotificationStores(),
+    
   }
 }

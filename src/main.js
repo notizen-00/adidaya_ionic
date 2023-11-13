@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from '@/router';
 import { pinia } from './Store/pinia'
 import { useStore } from '@/Store/modules'
+
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import { VSkeletonLoader } from 'vuetify/labs/VSkeletonLoader'

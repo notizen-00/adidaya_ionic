@@ -43,6 +43,7 @@
     import { PushNotifications } from '@capacitor/push-notifications';
     const store = inject('store');
 
+
     const tokens = ref('')
     const notificationss = ref([])
 const addListeners = async () => {
@@ -88,12 +89,11 @@ const getDeliveredNotifications = async () => {
 }
 
 
-
 onMounted(()=>{
-    addListeners();
+addListeners();
 registerNotifications();
 getDeliveredNotifications();
-
+store.notificationStore.fetchNotifications();
 store.hotelStore.fetchHotelRekomendasi();
 
 })
