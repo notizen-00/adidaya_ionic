@@ -7,6 +7,9 @@ import Panduan from '@/pages/Panduan.vue'
 import Video from '@/pages/Video.vue'
 import DetailHotel from '@/pages/DetailHotel.vue'
 import Start from '@/pages/Start.vue'
+import DetailAgenda from '@/pages/DetailPage.vue'
+import DetailPengumuman from '@/pages/DetailPengumuman.vue'
+
 const routes = [
     {
       path: '/',
@@ -17,6 +20,11 @@ const routes = [
       path:'/start',
       name:'Start',
       component:Start
+    },
+    {
+      path:'/detail-agenda',
+      name:'DetailAgenda',
+      component:DetailAgenda
     },
     {
       path:'/beranda',
@@ -51,6 +59,11 @@ const routes = [
       path: "/detail_hotel/:placeId",
       name:'detailHotel',
       component:DetailHotel
+    },
+    {
+      path:"/detail_pengumuman/:pengumumanId",
+      name:'detailPengumuman',
+      component:DetailPengumuman
     }
    
   ]

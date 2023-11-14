@@ -5,13 +5,14 @@
       class="mx-auto mt-3"
       color="info"
       theme="dark"
+      variant="elevated"
       max-width="400"
       @click="detailNotification(item.id)"
        
     >
       <v-card-text class="text-xs py-2">
-        <v-icon class="mb-4">fas fa-bullhorn</v-icon>
-        <v-chip class="ml-2" variannt="tonal" color="">{{ item.kategori }}</v-chip>
+        <v-icon class="mb-4" color="yellow">fas fa-bullhorn</v-icon>
+        <v-chip class="ml-2 -mt-2" color="yellow">{{ item.kategori }}</v-chip>
         <br>" {{ item.judul }} "
       </v-card-text>
   
@@ -19,12 +20,14 @@
         <v-list-item class="w-100">
           <template v-slot:prepend>
             <v-avatar
-              color="grey-darken-3"
-              image="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+              color="grey-yellow-3"
+             icon="fa-duotone fa-user-tie"
+             size="small"
+             class="-mr-3 -mb-2"
             ></v-avatar>
           </template>
   
-          <span class="text-sm">{{ item.author }}</span>
+          <div class="text-sm mt-5">{{ item.author }}</div>
   
           <template v-slot:append>
             <div class="justify-self-end">
@@ -41,12 +44,14 @@
   <script setup>
     import { storeToRefs } from 'pinia';
     import {inject} from 'vue'
+    import {useRouter} from 'vue-router'
     const store = inject('store')
-
+    const router = useRouter()
+    
     const {getNotifications} = storeToRefs(store.notificationStore)
 
     const detailNotification = (value) =>{
-        alert(value)
+    router.push('/detail_pengumuman/'+value)
 
     }
   </script>

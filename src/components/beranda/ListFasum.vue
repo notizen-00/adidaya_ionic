@@ -1,8 +1,8 @@
 <template>
     <div>
 
-        <div class="font-extrabold text-base mt-5 mb-5 ">
-            Warung Terdekat
+        <div class="font-extrabold text-base mt-5 mb-5">
+           Fasilitas Umum Terdekat
         </div>
         <div class="mt-2 d-flex w-full">
         <v-select
@@ -44,7 +44,7 @@
         hide-arrows
       >
         <v-slide-group-item
-          v-for="(n, index) in getWarung"
+          v-for="(n, index) in getFasum"
           :key="n"
           v-slot="{ isSelected, toggle, selectedClass }"
         >
@@ -74,9 +74,11 @@
                 :height="500"
                 :src="getPhotoUrl(n.foto)"
               ></v-img>
+             
+
             </div>
             <div class="d-flex inline-block justify-center bottom-4 absolute"> 
-              <span class="text-white line-clamp-1 text-center">{{ n.nama_warung }}</span>
+              <span class="text-white line-clamp-1 text-center">{{ n.nama_fasum }}</span>
               <!-- <v-btn
               @click.prevent="getDetail(n.placeId)"
               >
@@ -89,7 +91,7 @@
         </router-link>
         </v-slide-group-item>
       </v-slide-group>
-          
+      
    
     </div>
 </template>
@@ -100,15 +102,14 @@ import { inject,onMounted,ref, watch } from 'vue'
 import { Preferences } from '@capacitor/preferences';
 const store = inject('store')
 
-const { getWarung,getFotoHotel,getTipe,getJarak,isMountedFirst,getSlide } = storeToRefs(store.warungStore)
+const { getFasum,getFotoHotel,getTipe,getJarak,isMountedFirst,getSlide } = storeToRefs(store.fasumStore)
 const model = getSlide.value;
 
 
 const tipe_select = ref({ title: getTipe.value, isi: getTipe.value });
 const tipe_items = ref([
-  { title: 'Restoran', isi: 'Restoran' },
-  { title: 'Warung', isi: 'Warung' },
-  {title: 'Cafe', isi: 'Cafe'}
+  { title: 'Tempat Ibadah', isi: 'Tempat Ibadah' },
+  { title: 'Transportasi', isi: 'Stasiun' },
 ]);
 
 const jarak_select = ref({ title: getJarak.value+' Km', isi: getJarak.value })
@@ -121,19 +122,19 @@ const jarak_items = ref([
 
 const changeJarak = async() => {
 
-  store.warungStore.setJarak(jarak_select.value)
+  store.fasumStore.setJarak(jarak_select.value)
 
   const param = {
       jarak: getJarak.value,
       keyword: getTipe.value,
-      type: "restaurant"
+      type: "point_of_interest"
     };
-   await store.warungStore.fetchWarung(param);
+   await store.fasumStore.fetchFasum(param);
 
 }
 
 const updateSelectedSlideIndex = (index) => {
-  store.warungStore.setSlide(index);
+  store.fasumStore.setSlide(index);
 
   console.log(getSlide.value)
 };
@@ -141,14 +142,14 @@ const updateSelectedSlideIndex = (index) => {
 
 const changeTipe = async() => {
 
-  store.warungStore.setTipe(tipe_select.value)
+  store.fasumStore.setTipe(tipe_select.value)
 
   const param = {
       jarak: getJarak.value,
       keyword: getTipe.value,
-      type: "restaurant"
+      type: "point_of_interest"
     };
-   await store.warungStore.fetchWarung(param);
+   await store.fasumStore.fetchFasum(param);
 
 }
 
@@ -157,21 +158,21 @@ const getPhotoUrl = (photoReference) => {
 };
 
 const getDetail = async(placeId) => {
-    await store.warungStore.fetchDetail(placeId)
+    await store.fasumStore.fetchDetail(placeId)
 
 }
 onMounted( async () => {
   
   if (!isMountedFirst) {
 
-    store.warungStore.setMountedFirst()
+    store.fasumStore.setMountedFirst()
     // Lakukan inisialisasi atau permintaan API hanya pada saat first mount
     const param = {
       jarak: getJarak.value,
       keyword: getTipe.value,
-      type: "restaurant"
+      type: "point_of_interest"
     };
-    await store.warungStore.fetchWarung(param);
+    await store.fasumStore.fetchFasum(param);
   }else{
     console.log('sudah termount')
   

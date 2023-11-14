@@ -14,14 +14,16 @@ export const useDeviceStores = defineStore('deviceStore', {
 
       this.websocket.onopen = () => {
         console.log('WebSocket connection opened.');
-    
+        
         this.getTotalConnections(); // Panggil fungsi untuk mendapatkan totalConnections
       };
 
       this.websocket.onclose = () => {
         console.log('WebSocket connection closed.');
+
+         this.Connect();
       };
-      
+
       this.websocket.onmessage = (e) =>{
                 const payload = JSON.parse(e.data);
                 
@@ -30,7 +32,7 @@ export const useDeviceStores = defineStore('deviceStore', {
               } else if (payload.type == 'message') {
                 // Tambahkan pesan ke array pesan
                 // alert('test')
-                this.showNotification('test',payload.data.message)
+                this.showNotification('Pengumuman',payload.data.message)
                 this.message.push({
                   id: new Date().toISOString(),
                   content: payload.data.message,

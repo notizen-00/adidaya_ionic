@@ -1,77 +1,77 @@
 <template>
-    <div>
-      <v-card class="mb-4">
-        <v-card-text>
-          <v-select
-            v-model="steps"
-            :items="[0, 1, 2, 3, 'Bab 1 : Profil Singkat Universitas Jember']"
-            label="-- Pilih Bab --"
-          ></v-select>
-        </v-card-text>
-      </v-card>
-  
-      <v-stepper v-model="e1" class=" mb-20">
-        <template v-slot:default="{ prev, next }">
-          <v-stepper-header>
-            <template v-for="n in steps" :key="`${n}-step`">
-              <v-stepper-item
-                :complete="e1 > n"
-                :step="`Step {{ n }}`"
-                :value="n"
-                editable
-              ></v-stepper-item>
-  
-              <v-divider
-                v-if="n !== steps"
-                :key="n"
-              ></v-divider>
-            </template>
-          </v-stepper-header>
-  
-          <v-stepper-window>
-            <v-stepper-window-item
-           
-              v-for="n in steps"
-              :key="`${n}-content`"
-              :value="n"
-            >
-              <v-card
-                color="grey-lighten-1"
-                height="400"
-                class="relative"
-              >
-                <v-sheet
-                height="200"
-                class="-z-999 absolute"
-                >
-              
-                </v-sheet>
-              </v-card>
-            </v-stepper-window-item>
-          </v-stepper-window>
-  
-          <v-stepper-actions
-          
-            :disable="disable"
-            @click:prev="prev"
-            @click:next="next"
-          ></v-stepper-actions>
-        </template>
-      </v-stepper>
-    </div>
-  </template>
-  <script>
-  export default {
-    data () {
-      return {
-        e1: 1,
-        steps: 4,
-      }
-    },
+  <v-card
+    theme="dark"
+    flat
+    rounded="0"
+  >
+    <v-window v-model="onboarding">
+      <v-window-item
+        v-for="n in length"
+        :key="`card-${n}`"
+        :value="n"
+      >
+        <v-card
+          height="200"
+          class="d-flex justify-center align-center"
+        >
+          <span class="text-h2">
+            Card {{ n }}
+          </span>
+        </v-card>
+      </v-window-item>
+    </v-window>
 
-    computed: {
-      disable () {
-        return this.e1 === 1 ? 'prev' : this.e1 === this.steps ? 'next' : undefined
+    <v-card-actions class="justify-space-between">
+      <v-btn
+        variant="plain"
+        icon="fas fa-arrow-left"
+        @click="prev"
+      ></v-btn>
+      <v-item-group
+        v-model="onboarding"
+        class="text-center"
+        mandatory
+      >
+        <v-item
+          v-for="n in length"
+          :key="`btn-${n}`"
+          v-slot="{ isSelected, toggle }"
+          :value="n"
+        >
+          <v-btn
+            :variant="isSelected ? 'outlined' : 'text'"
+            icon="fas fa-circle-dot"
+            size="x-small"
+            @click="toggle"
+          ></v-btn>
+        </v-item>
+      </v-item-group>
+      <v-btn
+        variant="plain"
+        icon="fas fa-arrow-right"
+        @click="next"
+      ></v-btn>
+    </v-card-actions>
+  </v-card>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      length: 3,
+      onboarding: 1,
+    }),
+
+    methods: {
+      next () {
+        this.onboarding = this.onboarding + 1 > this.length
+          ? 1
+          : this.onboarding + 1
+      },
+      prev () {
+        this.onboarding = this.onboarding - 1 <= 0
+          ? this.length
+          : this.onboarding - 1
       },
     },
   }

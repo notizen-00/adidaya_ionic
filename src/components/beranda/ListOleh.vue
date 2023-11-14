@@ -44,7 +44,7 @@
         hide-arrows
       >
         <v-slide-group-item
-          v-for="(n, index) in getHotel"
+          v-for="(n, index) in getOleh"
           :key="n"
           v-slot="{ isSelected, toggle, selectedClass }"
         >
@@ -78,7 +78,7 @@
 
             </div>
             <div class="d-flex inline-block justify-center bottom-4 absolute"> 
-              <span class="text-white line-clamp-1 text-center">{{ n.nama_hotel }}</span>
+              <span class="text-white line-clamp-1 text-center">{{ n.nama_oleh }}</span>
               <!-- <v-btn
               @click.prevent="getDetail(n.placeId)"
               >
@@ -102,13 +102,13 @@ import { inject,onMounted,ref, watch } from 'vue'
 import { Preferences } from '@capacitor/preferences';
 const store = inject('store')
 
-const { getHotel,getFotoHotel,getTipe,getJarak,isMountedFirst,getSlide } = storeToRefs(store.hotelStore)
+const { getOleh,getFotoHotel,getTipe,getJarak,isMountedFirst,getSlide } = storeToRefs(store.olehStore)
 const model = getSlide.value;
 
 
 const tipe_select = ref({ title: getTipe.value, isi: getTipe.value });
 const tipe_items = ref([
-  { title: 'Oleh Oleh', isi: 'oleh-oleh' },
+  { title: 'Oleh Oleh', isi: 'Oleh-oleh' },
   { title: 'Semua', isi: 'Semua' },
 ]);
 
@@ -122,19 +122,19 @@ const jarak_items = ref([
 
 const changeJarak = async() => {
 
-  store.hotelStore.setJarak(jarak_select.value)
+  store.olehStore.setJarak(jarak_select.value)
 
   const param = {
       jarak: getJarak.value,
       keyword: getTipe.value,
-      type: "lodging"
+      type: "point_of_interest"
     };
-   await store.hotelStore.fetchHotel(param);
+   await store.olehStore.fetchOleh(param);
 
 }
 
 const updateSelectedSlideIndex = (index) => {
-  store.hotelStore.setSlide(index);
+  store.olehStore.setSlide(index);
 
   console.log(getSlide.value)
 };
@@ -142,14 +142,14 @@ const updateSelectedSlideIndex = (index) => {
 
 const changeTipe = async() => {
 
-  store.hotelStore.setTipe(tipe_select.value)
+  store.olehStore.setTipe(tipe_select.value)
 
   const param = {
       jarak: getJarak.value,
       keyword: getTipe.value,
-      type: "lodging"
+      type: "point_of_interest"
     };
-   await store.hotelStore.fetchHotel(param);
+   await store.olehStore.fetchOleh(param);
 
 }
 
@@ -158,21 +158,21 @@ const getPhotoUrl = (photoReference) => {
 };
 
 const getDetail = async(placeId) => {
-    await store.hotelStore.fetchDetail(placeId)
+    await store.olehStore.fetchDetail(placeId)
 
 }
 onMounted( async () => {
   
   if (!isMountedFirst) {
 
-    store.hotelStore.setMountedFirst()
+    store.olehStore.setMountedFirst()
     // Lakukan inisialisasi atau permintaan API hanya pada saat first mount
     const param = {
       jarak: getJarak.value,
       keyword: getTipe.value,
-      type: "lodging"
+      type: "point_of_interest"
     };
-    await store.hotelStore.fetchHotel(param);
+    await store.olehStore.fetchOleh(param);
   }else{
     console.log('sudah termount')
   

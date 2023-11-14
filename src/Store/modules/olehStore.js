@@ -3,7 +3,7 @@ import axios from 'axios';
 import router from '@/router'
 import { Preferences } from '@capacitor/preferences';
 import { CapacitorHttp } from '@capacitor/core';
-export const useWarungStores = defineStore('warungStore', {
+export const useOlehStores = defineStore('olehStore', {
   state: () => ({
     login: false,
     MountedFirst:false,
@@ -12,15 +12,33 @@ export const useWarungStores = defineStore('warungStore', {
         lat:'',
         lng:''
     },
-    warung:[],
-    foto_warung:[],
-    tipe:"Warung",
-    jarak:3,
+    oleh:[],
+    foto_oleh:[],
+    tipe:"Oleh-oleh",
+    jarak:1,
     slide:0,
-    detail_warung:[]
+    detail_oleh:[],
+    navigation:'',
+    oleh_rekomendasi:[],
  
   }),
   actions: {
+    async fetchOlehRekomendasi(){
+
+      const url = 'https://ao.apps.unej.ac.id/oleh/rekomendasi'; // URL tanpa photo_reference
+    
+      try {
+        const response = await axios.get(url);
+  
+        console.log(response.data); 
+
+        this.oleh_rekomendasi = response.data;
+
+      } catch (error) {
+        console.error(error);
+      }
+
+    },
     async setLokasi (coords) {
 
          this.lokasi.lat = coords.latitude;
@@ -37,42 +55,46 @@ export const useWarungStores = defineStore('warungStore', {
             value: coords.longitude,
           });
     },
-    async fetchWarung(param){
+    async fetchOleh(param){
 
         const jarak = param.jarak;
         const type = param.type;
         const keyword = param.keyword;
         const options = {
           
-            url: 'https://ao.apps.unej.ac.id/warung/api/'+keyword+'/'+type+'/'+jarak,
+            url: 'https://ao.apps.unej.ac.id/oleh/api/'+keyword+'/'+type+'/'+jarak,
           };
         
           const response = await CapacitorHttp.get(options);
           
-          this.warung = response.data[0].item;
+          this.oleh = response.data[0].item;
 
     },
-    async fetchHotelCache(param){
+    async fetchOlehCache(param){
 
       const jarak = param.jarak;
       const type = param.type;
       const keyword = param.keyword;
       const options = {
         
-          url: 'https://ao.apps.unej.ac.id/warung/api/'+keyword+'/'+type+'/'+jarak,
+          url: 'https://ao.apps.unej.ac.id/oleh/api/'+keyword+'/'+type+'/'+jarak,
         };
       
         const response = await CapacitorHttp.get(options);
         
-        this.warung = response.data[0].item;
+        this.oleh = response.data[0].item;
 
+    },
+    setNavigation(value){
+
+        this.navigation = value;
     },
     SetMountedFirst()
     {
       this.MountedFirst = true
     },
     async fetchDetail(placeId) {
-      const url = 'https://ao.apps.unej.ac.id/warung/api/foto'; // URL tanpa photo_reference
+      const url = 'https://ao.apps.unej.ac.id/oleh/api/foto'; // URL tanpa photo_reference
     
       try {
         const response = await axios.post(url, { placeId: placeId });
@@ -80,8 +102,8 @@ export const useWarungStores = defineStore('warungStore', {
         console.log(placeId);
         console.log(response.data.result); // Data yang diterima dari server
 
-        this.foto_warung = response.data.result.photos;
-        this.detail_warung = response.data.result;
+        this.foto_oleh = response.data.result.photos;
+        this.detail_oleh = response.data.result;
       } catch (error) {
         console.error(error);
       }
@@ -108,8 +130,12 @@ export const useWarungStores = defineStore('warungStore', {
     getToken(){
         return this.token
     },
-    getWarung(){
-        return this.warung
+    getOleh(){
+        return this.oleh
+    },
+    getolehRekomendasi()
+    {
+      return this.oleh_rekomendasi
     },
     getLokasi()
     {
@@ -126,11 +152,14 @@ export const useWarungStores = defineStore('warungStore', {
     {
       return this.jarak
     },
-    getFotoWarung(){
-      return this.foto_warung
+    getFotooleh(){
+      return this.foto_oleh
     },
-    getDetailWarung(){
-      return this.detail_warung
+    getDetailoleh(){
+      return this.detail_oleh
+    },
+    getNavigation(){
+      return this.navigation
     }
 
   },

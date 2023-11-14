@@ -6,6 +6,8 @@ import { useHotelStores } from './hotelStore'
 import { useWarungStores } from './warungStore'
 import { useDeviceStores } from './deviceStore'
 import { useNotificationStores } from './notificationStore'
+import { useOlehStores } from './olehStore'
+import { useFasumStores } from './fasumStore'
 // Impor modul-modul lain jika ada
 
 export function useStore() {
@@ -16,6 +18,8 @@ export function useStore() {
     warungStore:useWarungStores(),
     deviceStore:useDeviceStores(),
     notificationStore:useNotificationStores(),
+    olehStore:useOlehStores(),
+    fasumStore:useFasumStores()
     
   }
 }

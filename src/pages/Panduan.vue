@@ -10,8 +10,9 @@
         
     <v-container class="mt-20">
  
-    <StepperMenu></StepperMenu>
-  
+    <!-- <StepperMenu></StepperMenu> -->
+        <CardMenu></CardMenu>
+        
     
     <bottom-navigation></bottom-navigation>
     </v-container>
@@ -22,4 +23,6 @@
  import BottomNavigation from '@/components/BottomNavigation.vue'
  import Accordion from '@/components/panduan/accordion.vue'
 import StepperMenu from '../components/panduan/StepperMenu.vue';
+import CardMenu from '@/components/panduan/Cardmenu.vue';
+
 </script>

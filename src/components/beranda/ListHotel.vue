@@ -182,6 +182,7 @@ onMounted( async () => {
     await store.hotelStore.fetchHotel(param);
   }else{
     console.log('sudah termount')
+    
   
   }
 });

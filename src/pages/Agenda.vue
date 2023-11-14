@@ -10,16 +10,26 @@
     <v-container>
 
     <div class=" mt-20 mb-20">
-    <p class="text-large font-bold">
-        Kamis, 7 Desember 2023  <v-btn class="ml-3 w-1/3" color="blue" rounded="xl" size="small">Hari 1</v-btn>
+      
+    <p class="text-large font-bold pt-5 -mb-5">
+       <v-icon color="red" size="small">fas fa-calendar-alt</v-icon> Kamis, 7 Desember 2023  <v-btn class="ml-3 w-1/4" color="blue" rounded="xl" size="small">Hari 1</v-btn>
     </p>
 
     <LineBreak color="blue" fill="#1AA7FF"/>
     <Hari1></Hari1>
+    <p class="text-large font-bold mt-10 -mb-5">
+        <v-icon color="red" size="small">fas fa-calendar-alt</v-icon> Jumat, 8 Desember 2023  <v-btn class="ml-3 w-1/3" color="blue" rounded="xl" size="small">Hari 2</v-btn>
+    </p>
     <LineBreak color="blue" fill="#1AA7FF"/>
     <Hari2></Hari2>
+    <p class="text-large font-bold mt-10 -mb-5">
+        <v-icon color="red" size="small">fas fa-calendar-alt</v-icon> Sabtu, 9 Desember 2023  <v-btn class="ml-3 w-1/3" color="blue" rounded="xl" size="small">Hari 3</v-btn>
+    </p>
     <LineBreak color="blue" fill="#1AA7FF"/>
     <Hari3></Hari3>
+    <p class="text-large font-bold mt-10 -mb-5">
+        <v-icon color="red" size="small">fas fa-calendar-alt</v-icon> Minggu, 10 Desember 2023  <v-btn class="ml-3 w-1/4" color="blue" rounded="xl" size="small">Hari 4</v-btn>
+    </p>
     <LineBreak color="blue" fill="#1AA7FF"/>
     <Hari4></Hari4>
     </div>

@@ -94,7 +94,7 @@ addListeners();
 registerNotifications();
 getDeliveredNotifications();
 store.notificationStore.fetchNotifications();
-store.hotelStore.fetchHotelRekomendasi();
+store.deviceStore.Connect();
 
 })
 

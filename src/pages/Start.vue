@@ -166,6 +166,37 @@ const toggleModel = () => {
 
 onMounted(async()=>{
   store.deviceStore.Connect();
+  
+  const param_hotel = {
+      jarak: 3,
+      keyword: 'Hotel',
+      type: "lodging"
+    };
+  store.hotelStore.fetchHotel(param_hotel);
+  
+  const param_warung = {
+      jarak: 3,
+      keyword: 'Warung',
+      type: "restaurant"
+    };
+  store.warungStore.fetchWarung(param_warung);
+
+  const param_oleh = {
+      jarak: 3,
+      keyword: 'Oleh-oleh',
+      type: "point_of_interest"
+    };
+  store.olehStore.fetchOleh(param_oleh);
+  
+  const param_fasum = {
+      jarak: 3,
+      keyword: 'Masjid',
+      type: "point_of_interest"
+    };
+  store.fasumStore.fetchFasum(param_fasum);
+
+  store.hotelStore.fetchHotelRekomendasi();
+
 
 })
 
