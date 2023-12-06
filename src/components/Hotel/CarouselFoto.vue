@@ -163,6 +163,8 @@ onMounted(() => {
   setTimeout(() => {
     store.hotelStore.setNavigation(getDetailHotel.value.url)
 
+    alert(getDetailHotel.value.url)
+
     isLoading.value = false
   }, 1000)
 })

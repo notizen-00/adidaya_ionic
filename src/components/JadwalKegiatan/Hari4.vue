@@ -23,9 +23,7 @@
       </div>
      
     </template>
-    <RouterLink to="/detail-agenda">
-    <v-btn variant="tonal" color="blue">Detail</v-btn>
-    </RouterLink>
+    <v-btn variant="tonal" @click="openNavigation(n.url)" append-icon="fas fa-location-dot"  color="blue"> Detail</v-btn>
     </v-timeline-item>
 
     
@@ -34,14 +32,18 @@
 
   <script setup>
     import {ref} from 'vue'
+    import { Browser } from '@capacitor/browser';
 
-
+const openNavigation = async (value) => {
+await Browser.open({ url: value });
+};
     const jadwalKegiatan = ref([
   {
     id: 1,
     waktu: "07.00 - 17.00 WIB",
     kegiatan: "Paket	Wisata	(bagi	yang mengikuti/opsional)",
-    lokasi: "Puslit Kopi dan Kakao (Kebun Renteng) dan Pantai Papuma"
+    lokasi: "Puslit Kopi dan Kakao (Kebun Renteng) dan Pantai Papuma",
+    url:"https://maps.google.com/?cid=13385334656637742382"
   },
  
 ]);

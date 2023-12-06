@@ -42,34 +42,51 @@
           </v-icon>
         </v-btn>
 
-        <v-btn class="my-btn" to="/pengumuman">
-            <v-icon>
-                <svg xmlns="http://www.w3.org/2000/svg" width="26.995" height="26.993" viewBox="0 0 26.995 26.993">
-                    <path id="megaphone" d="M25.868,18a1.125,1.125,0,0,1-.5-.118l-2.249-1.125a1.125,1.125,0,1,1,1.005-2.013l2.249,1.125a1.125,1.125,0,0,1-.5,2.131ZM24.122,7.761l2.249-1.125a1.125,1.125,0,0,0-1.005-2.013L23.116,5.747a1.125,1.125,0,0,0,1.005,2.013Zm2.871,3.487a1.125,1.125,0,0,0-1.125-1.125H23.619a1.125,1.125,0,1,0,0,2.249h2.249A1.125,1.125,0,0,0,26.993,11.247ZM20.245,21.37V1.125a1.125,1.125,0,0,0-2.249,0c0,3.317-2.905,4.5-5.624,4.5H4.5a4.5,4.5,0,0,0-4.5,4.5v2.249a4.5,4.5,0,0,0,4.5,4.5h7.873c2.718,0,5.624,1.182,5.624,4.5a1.125,1.125,0,0,0,2.249,0ZM9.207,19.12H4.5a6.748,6.748,0,0,1-1.554-.188L5.756,25.21A3,3,0,0,0,8.5,26.993a2.769,2.769,0,0,0,2.522-3.905Z" :fill="isActive('pengumuman') ? '#1aa7ff':'#c0dee8'"/>
-                  </svg>
-                  
-            </v-icon>
+        <v-btn class="my-btn" @click="checkCanOpenUrl">
+          
+          <v-icon :color="isActive('slot') ? '#1aa7ff':'#c0dee8'">
+            fas fa-check-to-slot
+          </v-icon>
         </v-btn>
+
+    
       </v-bottom-navigation>
   
   </template>
 
-  <script>
-  export default {
-    data: () => ({ value: 1 }),
-    methods: {
-    isActive(routeName) {
-      
-      if(this.$route.name === routeName){
-        return true
-      }else{
-        return false
-      }
-    },
-  },
-   
+  <script setup>
+  import { ref } from 'vue';
+  import { useRoute } from 'vue-router';
+  import { AppLauncher } from '@capacitor/app-launcher';
+  import { Browser } from '@capacitor/browser';
+
+const openNavigation = async () => {
+await Browser.open({ url: 'https://drive.google.com/drive/folders/1wAotHz4LgjVAg_pbhTRXBmgm24wme1cw?usp=sharing' });
+};
+const checkCanOpenUrl = async () => {
+  const { value } = await AppLauncher.canOpenUrl({ url: 'com.evoteabdidaya.app' });
+
+  console.log('Can open url: ', value);
+  if(value){
+    openPage()
+  }else{
+    alert('Silahkan unduh dan install aplikasi Vote Abdidaya')
+    openNavigation()
+    
   }
-</script>
+};
+
+const openPage = async () => {
+  await AppLauncher.openUrl({ url: 'com.evoteabdidaya.app' });
+};
+  const router = useRoute()
+  const value = ref(1);
+  
+  const isActive = (routeName) => {
+    return router.name === routeName;
+  };
+  </script>
+  
 
 <style scoped>
 .v-btn.my-btn {

@@ -36,12 +36,6 @@
         waktu: "09.00 - 14.00 WIB",
         kegiatan: "Sejarah Singkat UNEJ",
         lokasi: "Gedung Keluarga Alumni UNEJ"
-      },
-      {
-        id: 2,
-        waktu: "14.00 - 16.00 WIB",
-        kegiatan: "Denah",
-        lokasi: "Gedung Soejarwo, Lantai V"
       }
     ]);
 </script>

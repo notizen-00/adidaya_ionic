@@ -11,7 +11,7 @@
     <v-container class="mt-20">
  
     <!-- <StepperMenu></StepperMenu> -->
-        <CardMenu></CardMenu>
+        <CardMenu class="mt-40"></CardMenu>
         
     
     <bottom-navigation></bottom-navigation>

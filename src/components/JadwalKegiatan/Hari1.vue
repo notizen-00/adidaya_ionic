@@ -22,9 +22,9 @@
         </div>
        
       </template>
-      <RouterLink to="/detail-agenda">
-      <v-btn variant="tonal" color="blue">Detail</v-btn>
-      </RouterLink>
+
+      <v-btn variant="tonal" @click="openNavigation(n.url)" append-icon="fas fa-location-dot"  color="blue"> Detail</v-btn>
+
       </v-timeline-item>
   
       
@@ -33,36 +33,41 @@
 
   <script setup>
     import {ref} from 'vue'
+    import { Browser } from '@capacitor/browser';
 
-
+    const openNavigation = async (value) => {
+  await Browser.open({ url: value });
+};
     const jadwalKegiatan = ref([
       {
         id: 1,
         waktu: "09.00 - 14.00 WIB",
         kegiatan: "Registrasi Peserta",
-        lokasi: "Gedung Keluarga Alumni "
+        lokasi: "Gedung Keluarga Alumni ",
+        url:"https://maps.google.com/?cid=3821154017735390019"
       },
       {
         id: 2,
-        waktu: "14.00 - 16.00 WIB",
+        waktu: "14.30 - 16.00 WIB",
         kegiatan: "Technical Meeting",
-        lokasi: "Gedung Soejarwo, Lantai V"
+        lokasi: "Gedung Soejarwo, Lantai V",
+        url:"https://maps.google.com/?cid=4259824441275624270"
       },
       {
         id: 3,
         waktu: "14.00 - 18.30 WIB",
         kegiatan: "Penyiaran Pameran Poster, Video, dan Produk (Expo)",
-        lokasi: "Gedung Soetardjo UNEJ"
+        lokasi: "Gedung Soetardjo UNEJ",
+        url:"https://maps.google.com/?cid=1493714162615523958"
       },
       {
         id: 4,
         waktu: "19.00 - 22.00 WIB",
         kegiatan: "Pembukaan ABDIDAYA ORMAWA 2023",
-        lokasi: "Gedung Auditorium UNEJ"
+        lokasi: "Gedung Auditorium UNEJ",
+        url:"https://maps.google.com/?cid=3473882070966639052"
       }
     ]);
 
-    const test = (value) => {
-      alert(value)
-    }
+   
   </script>

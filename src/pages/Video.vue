@@ -9,18 +9,17 @@
         </div>
       </v-app-bar>
       <v-container>
-        <div class="w-full mt-20 bg-red-200">
-          <p>Total Connections: {{ getTotalConnections ? getTotalConnections : 0 }}</p>
-          {{ getDeviceId ? getDeviceId : '-' }}  
-        </div>
-
-        <input type="text" class="border border-collapse mt-2 border-red-400" v-model="pesan">
-
-        <v-btn
-        @click="sendMessage(pesan)"
-        >
-          Kirim
-        </v-btn>
+        
+        <!-- <div class="w-full relative d-flex justify-"> -->
+          <v-skeleton-loader   class="mt-20 rounded-xl" v-if="loading" type="card"></v-skeleton-loader>
+          <v-skeleton-loader   class="mt-10 rounded-xl" v-if="loading" type="card"></v-skeleton-loader>
+          <v-skeleton-loader   class="mt-10 rounded-xl" v-if="loading" type="card"></v-skeleton-loader>
+          <v-skeleton-loader   class="mt-10 rounded-xl" v-if="loading" type="card"></v-skeleton-loader>
+        <iframe   @load="onIframeLoad" class="w-full  mt-20 rounded-xl" height="200" src="https://www.youtube.com/embed/8dOkwO2QDPU?si=SXy1STDaKINQkmcR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe    @load="onIframeLoad" class="w-full mt-10 rounded-xl" height="200" src="https://www.youtube.com/embed/E-OxdwDXaGQ?si=9TtnoQbpLXY5zHxI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <!-- </div> -->
+        <iframe    @load="onIframeLoad" class="w-full mt-10 rounded-xl" height="200" src="https://www.youtube.com/embed/ig3EtnOpIsY?si=HRqJDFGVc3JZT8Y3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe    @load="onIframeLoad" class="w-full mt-10 mb-20 rounded-xl" height="200" src="https://www.youtube.com/embed/uv0ubuVC5ac?si=gvAOwS8MpLKdUAKv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <bottom-navigation></bottom-navigation>
       </v-container>
     </v-layout>
@@ -34,7 +33,7 @@
   const store = inject('store')
   const pesan = ref('')
 
-
+const loading = ref(true)
   const { getTotalConnections,getDeviceId } = storeToRefs(store.deviceStore)
  
   const sendMessage = (value) =>{
@@ -42,8 +41,20 @@
      store.deviceStore.sendMessage(value)
   }
 
+  const onIframeLoad = () => {
+    // This function will be called when each iframe is fully loaded
+    // Add any logic you want to execute after the iframe is loaded
+    checkAllIframesLoaded();
+  };
 
-  
+  const checkAllIframesLoaded = () => {
+    // Check if all iframes are loaded
+    if (document.querySelectorAll('iframe').length === 4) {
+      // All iframes are loaded, perform any action you need
+      loading.value = false;
+    }
+  };
+
 //   onMounted(async () => {
   
   
@@ -110,5 +121,7 @@
   
 //     form.value.message = '';
 //   };
+
+ 
   </script>
   

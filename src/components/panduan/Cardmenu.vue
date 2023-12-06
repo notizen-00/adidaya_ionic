@@ -1,5 +1,5 @@
 <template>
-    <v-slide-group
+    <!-- <v-slide-group
       v-model="model"
       class="mt-3 pa-4"
       selected-class="bg-info"
@@ -38,7 +38,46 @@
     <component v-if="model === 0" :is="BAB1" />
     <component v-if="model === 1" :is="BAB2" />
     <component v-if="model === 2" :is="BAB3" />
-    <component v-if="model === 3" :is="BAB1" />
+    <component v-if="model === 3" :is="BAB1" /> -->
+
+    <v-card
+    class="mx-auto my-8 mt-48"
+    max-width="344"
+    variant="tonal"
+    color="blue"
+    title="Buku Juknis"
+    href="https://unej.ac.id/wp-content/uploads/2023/10/Panduan-Abdidaya-Ormawa-2023.pdf"
+    target="_blank"
+    rel="noopener"
+  >
+  <template #prepend>
+    <v-icon color="blue">fa-duotone fa-book-open-reader</v-icon>
+  </template>
+  <template #append>
+    <i class="fa-duotone fa-arrow-up-right-from-square"></i>
+  </template>
+</v-card>
+
+  <v-card
+    class="mx-auto my-8"
+    max-width="344"
+    variant="tonal"
+    color="blue"
+    title="Buku Saku"
+ 
+    append-icon="fas fa-link"
+    href="https://abdidaya.unej.ac.id/images/Buku-Saku-Abdidaya-211123.pdf"
+    target="_blank"
+    rel="noopener"
+  >
+  <template #prepend>
+    <v-icon color="blue">fa-duotone fa-book-open-reader</v-icon>
+  </template>
+  <template #append>
+    <i class="fa-duotone fa-arrow-up-right-from-square"></i>
+  </template>
+</v-card>
+
  
    
   </template>

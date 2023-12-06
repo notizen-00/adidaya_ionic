@@ -22,9 +22,7 @@
       </div>
      
     </template>
-    <RouterLink to="/detail-agenda">
-    <v-btn variant="tonal" color="blue">Detail</v-btn>
-    </RouterLink>
+    <v-btn variant="tonal" @click="openNavigation(n.url)" append-icon="fas fa-location-dot"  color="blue"> Detail</v-btn>
     </v-timeline-item>
 
     
@@ -34,31 +32,46 @@
   <script setup>
     import {ref} from 'vue'
 
+    import { Browser } from '@capacitor/browser';
 
+const openNavigation = async (value) => {
+await Browser.open({ url: value });
+};
     const jadwalKegiatan = ref([
       {
         id: 1,
         waktu: "08.00 - 09.30 WIB",
         kegiatan: "Penyiapan Pameran Poster, Video, dan Produk (Expo)",
-        lokasi: "Gedung Soetardjo UNEJ"
+        lokasi: "Gedung Soetardjo UNEJ",
+        url:"https://maps.google.com/?cid=1493714162615523958"
       },
       {
         id: 2,
         waktu: "10.00 - 17.00 WIB",
-        kegiatan: "Expo ABDIDAYA ORMAWA 2023",
-        lokasi: "Gedung Soetardjo dan Aula PSTF"
+        kegiatan: "Expo ABDIDAYA ORMAWA 2023 ( Hari 1)",
+        lokasi: "Gedung Soetardjo dan Aula PSTF",
+        url:"https://maps.google.com/?cid=14947528077697532496"
       },
       {
         id: 3,
         waktu: "10.00 - 17.00 WIB",
         kegiatan: "Bazar UMKM Unggulan Kabupaten Jember",
-        lokasi: "Area Parkir Gedung Soetardjo"
+        lokasi: "Area Parkir Gedung Soetardjo",
+        url:"https://maps.google.com/?cid=1493714162615523958"
       },
       {
         id: 4,
-        waktu: "12.00 - 14.00 WIB",
-        kegiatan: "Makan Siang Bersama UMKM Unggulan Kabupaten Jember",
-        lokasi: "Halaman Gedung Soetardjo"
+        waktu: "16.00 - 22.00 WIB",
+        kegiatan: "Panggung Kreativitas Ormawa Indonesia (mahasiswa) ",
+        lokasi: "Lapangan Parkir Utara Gd Soetarjo",
+        url:"https://maps.google.com/?cid=1493714162615523958"
+      },
+      {
+        id:5,
+        waktu:'18.30 - 21.00 WIB',
+        kegiatan:'Gala Dinner (PT, Dosen pembina, dan Mitra)',
+        lokasi:'Halaman Rektorat Universitas Jember',
+        url:"https://maps.google.com/?cid=12226106197481831557"
       }
     ]);
   </script>

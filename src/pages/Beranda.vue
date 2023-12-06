@@ -49,7 +49,7 @@
 const addListeners = async () => {
   await PushNotifications.addListener('registration', token => {
     console.info('Registration token: ', token.value);
-
+  
     tokens.value = token.value;
 
 
